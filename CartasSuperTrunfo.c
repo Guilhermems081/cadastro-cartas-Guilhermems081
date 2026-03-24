@@ -8,10 +8,12 @@ int main() {
   // Área para definição das variáveis para armazenar as propriedades das cidades
   // Nas variáveis códigos, eu coloquei codigo[3], porque alem de pegar o valor ele vai guarda o enter
     char estado1[20], estado2[20], cidade1[20], cidade2[20], codigo1[3], codigo2[3];
-    int populacao1, populacao2, pontos_turisticos1, pontos_turisticos2;
+    unsigned long int populacao1, populacao2;
+    int pontos_turisticos1, pontos_turisticos2;
     float pib1, pib2, area_da_cidade1, area_da_cidade2;
     float densidade_populacional1, densidade_populacional2;
     float pib_per_capto1, pib_per_capto2;
+    float superPoder1, superPoder2;
   // Área para entrada de dados
   
   // Área para adicionar as informações da carta 1
@@ -27,7 +29,7 @@ int main() {
     scanf("%s", codigo1);
 
     printf("Digite a quantidade de habitantes: ");
-    scanf("%d", &populacao1);
+    scanf("%lu", &populacao1);
 
     printf("Digite a quantidade de pontos turisticos: ");
     scanf("%d", &pontos_turisticos1);
@@ -40,8 +42,9 @@ int main() {
     // serve para pegar o espaço ou enter que foi dado no scanf para que não interfira na proxima ação
     getchar(); 
 
-    densidade_populacional1 = populacao1 / area_da_cidade1;
+    densidade_populacional1 = (float)populacao1 / area_da_cidade1;
     pib_per_capto1 =  (float) (pib1 * 1000000000) / populacao1;
+    superPoder1 = (1.0 / densidade_populacional1) + populacao1 + pib1 + pontos_turisticos1 + area_da_cidade1 + pib_per_capto1;
 
   // [Area para adicionar as informações da carta 2
     printf("\n====== DADOS DA CARTA 2 ======\n");
@@ -56,7 +59,7 @@ int main() {
     scanf("%s", codigo2);
 
     printf("Digite a quantidade de habitantes: ");
-    scanf("%d", &populacao2);
+    scanf("%lu", &populacao2);
 
     printf("Digite a quantidade de pontos turisticos: ");
     scanf("%d", &pontos_turisticos2);
@@ -67,31 +70,21 @@ int main() {
     printf("Digite o PIB da cidade: ");
     scanf("%f", &pib2);
 
-    densidade_populacional2 = populacao2 / area_da_cidade2;
+    densidade_populacional2 = (float)populacao2 / area_da_cidade2;
     pib_per_capto2 =  (float) (pib2 * 1000000000) / populacao2;
+    superPoder2 = (1.0 / densidade_populacional2) + populacao2 + pib2 + pontos_turisticos2 + area_da_cidade2 + pib_per_capto2;
 
-    printf("\nCarta 1:\n");
-    printf("Estado: %c\n", estado1[0]);
-    printf("Código: %c%s\n", estado1[0], codigo1);
-    printf("Nome da cidade: %s", cidade1);
-    printf("População: %d\n", populacao1);
-    printf("Área: %.2f km\n", area_da_cidade1);
-    printf("PIB: %.2f bilhões de reais\n", pib1);
-    printf("Número de Pontos Turísticos: %d\n", pontos_turisticos1);
-    printf("Densidade Populacional: %.2f hab/km²\n", densidade_populacional1);
-    printf("PIB per Capito: %.2f reais\n", pib_per_capto1);
+  printf("\n========== CARTA VENCEDORA ==========\n");
+  printf("Resultado 1 CARTA 1 vence e Resultado CARTA 0 carta 2 vence\n");
 
-    printf("\nCarta 2:\n");
-    printf("Estado: %c\n", estado2[0]);
-    printf("Código: %c%s\n", estado2[0], codigo2);
-    printf("Nome da cidade: %s", cidade2);
-    printf("População: %d\n", populacao2);
-    printf("Área: %.2f km\n", area_da_cidade2);
-    printf("PIB: %.2f bilhões de reais\n", pib2);
-    printf("Número de Pontos Turísticos: %d\n", pontos_turisticos2);
-    printf("Densidade Populacional: %.2f hab/km²\n", densidade_populacional2);
-    printf("PIB per Capito: %.2f reais\n", pib_per_capto2);
-  // Área para exibição dos dados da cidade
+  printf("\nComparação de cartas:\n");
+  printf("População: Carta %d venceu\n", populacao1 > populacao2);
+  printf("Área: Carta %d venceu\n", area_da_cidade1 > area_da_cidade2);
+  printf("PIB: Carta %d venceu\n", pib1 > pib2);
+  printf("Pontos turisticos: Carta %d venceu\n", pontos_turisticos1 > pontos_turisticos2);
+  printf("Densidade Populacional: Carta %d venceu\n", (1.0 / densidade_populacional1) > (1.0 / densidade_populacional2));
+  printf("PIB per Capta: Carta %d venceu\n", pib_per_capto1>pib_per_capto2);
+  printf("Super Poder: Carta %d venceu\n", superPoder1 > superPoder2);
 
     return 0;
 } 
